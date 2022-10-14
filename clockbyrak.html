@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock By - Rak</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Creepster&family=Rampart+One&display=swap');
+
+        /*  Font  should be use 
+            font-family: 'Rampart One', cursive;
+            font-family: 'Black Ops One', cursive;
+            font-family: 'Creepster', cursive; */
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .container {
+            height: 100vh;
+            width: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            /* background-image: url("https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"); */
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container h1 {
+            position: absolute;
+            top: 0;
+            font-size: 6.0rem;
+            font-family: 'Rampart One', cursive;
+            color: rgb(84, 32, 32);
+            background: rgba(255, 255, 255, 0.56);
+            padding: .5rem 1.2rem;
+            border-radius: 1.2rem;
+            text-align: center;
+            transition: 1s;
+        }
+
+        .container .date {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: 30%;
+            font-size: 2.0rem;
+            /* font-weight: bold; */
+            background: rgba(1, 25, 31, 0.755);
+            border-radius: 2.0rem;
+            padding: 1.0rem 2.0rem;
+            color: rgba(255, 255, 255, 0.652);
+            font-family: 'Black Ops One', cursive;
+            transition: 1s;
+        }
+
+        .clock {
+            position: absolute;
+            top: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .clock span {
+            height: 8.0rem;
+            width: 10.0rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.479);
+            color: rgba(255, 255, 255, 0.638);
+            margin: 0 2.5rem;
+            font-size: 6.0rem;
+            border-radius: 1.2rem 1.2rem 0 0;
+            box-shadow: .2rem .3rem .6rem black;
+            font-family: 'Black Ops One', cursive;
+            transition: 1s;
+        }
+
+        .clock img {
+            width: 5.0rem;
+        }
+
+        #ampm {
+            font-size: 2.5rem;
+        }
+
+        .clock .text {
+            height: 4rem;
+            font-size: 2.0rem;
+            border-radius: 0 0 1.2rem 1.2rem;
+            box-shadow: .2rem .3rem .6rem black;
+        }
+
+        @media screen and (max-width:600px) {
+            html {
+                font-size: 53%;
+            }
+           
+            .container .date {
+               font-size:5rem;
+               top:40%;
+            }
+            .clock {
+            top:55%;
+        }
+        }
+
+        @media screen and (max-width:500px) {
+            html {
+                font-size: 43%;
+            }
+            .container h1 {
+                top:10%;
+                font-size:6rem;
+            }
+        }
+
+        @media screen and (max-width:400px) {
+            html {
+                font-size: 32%;
+            }
+        }
+
+        @media screen and (max-width:300px) {
+            html {
+                font-size: 21%;
+            }
+            .container h1 {
+                top:25%;
+                font-size:7rem;
+            }
+        }
+
+        @media screen and (max-width:200px) {
+            html {
+                font-size: 10%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1> Clock By Rak</h1>
+        <div class="date">
+            <span id="date">dd</span> - <span id="month">mm </span> - <span id="year">yyyy</span>
+        </div>
+        <div class="clock">
+
+            <div class="item">
+                <span id="hr">00</span>
+                <span class="text flex">Hour</span>
+            </div>
+
+            <div class="item">
+                <span id="min">00</span>
+                <span class="text flex">Minute</span>
+            </div>
+
+            <div class="item">
+                <span id="sec">00</span>
+                <span class="text flex">Second</span>
+            </div>
+
+            <div class="item">
+                <span><img src="" id="icon"></span>
+                <span class="text flex" id="ampm">- -</span>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <script>
+        var date = document.getElementById("date");
+        var month = document.getElementById("month");
+        var year = document.getElementById("year");
+        var hour = document.getElementById("hr");
+        var sec = document.getElementById("sec");
+        var min = document.getElementById("min");
+        var Bg = document.getElementsByClassName("container");
+        var icon = document.getElementById('icon')
+        var bg = document.getElementsByClassName("container");
+        console.log(icon)
+
+        // ---------------------------------------------------Date Making -------------------------------------------------------
+
+        let dd = new Date().getDate();
+        let mm = new Date().getMonth() + 1; // in js month start from 0 to 11 thats why we add 1.
+        let yy = new Date().getFullYear();
+
+        date.innerText = dd;
+        month.innerText = mm;
+        year.innerText = yy;
+
+
+
+        // --------------------------------------------------- Clock Making --------------------------------------------------------
+        function clock() {
+
+
+            let h = new Date().getHours();
+            let m = new Date().getMinutes();
+            let s = new Date().getSeconds();
+
+            let AMPM = "AM"
+
+
+
+
+
+
+
+            // -------------------------------------------- Weather Icon Changer -------------------------------------------------------------
+            let nightIcon = "https://cdn-icons-png.flaticon.com/512/1809/1809597.png";
+            let dayIcon = "https://cdn-icons-png.flaticon.com/512/3917/3917805.png";
+            let moreveIcon = "https://cdn-icons-png.flaticon.com/512/3892/3892928.png";
+
+            if ((h >= 10) && (h <= 16)) { // between 10-Am  To 4-Pm
+                icon.setAttribute("src", dayIcon)
+
+                document.body.style.backgroundImage = "url('https://images.pexels.com/photos/1542495/pexels-photo-1542495.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"
+                document.body.style.backgroundRepeat = "no-repeat"
+                document.body.style.backgroundPosition = "center"
+                document.body.style.backgroundSize = "cover"
+            }
+            else if ((h >= 5) && (h < 10)) { // between 5-Am  To 10-Am
+                icon.setAttribute("src", moreveIcon)
+
+                document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1624180395169-793787569aef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')"
+                document.body.style.backgroundRepeat = "no-repeat"
+                document.body.style.backgroundPosition = "center"
+                document.body.style.backgroundSize = "cover"
+            }
+            if ((h > 16) && (h < 19)) { // between 4-Pm  To 7-Pm
+                icon.setAttribute("src", moreveIcon)
+
+                document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1624180395169-793787569aef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')"
+                document.body.style.backgroundRepeat = "no-repeat"
+                document.body.style.backgroundPosition = "center"
+                document.body.style.backgroundSize = "cover"
+            }
+            if ((h >= 19) || (h < 5)) { // between 7-Pm  To 5-Am
+                icon.setAttribute("src", nightIcon)
+                document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1488866022504-f2584929ca5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2062&q=80')"
+                document.body.style.backgroundRepeat = "no-repeat"
+                document.body.style.backgroundPosition = "center"
+                document.body.style.backgroundSize = "cover"
+            }
+
+
+
+            //  ------------------------------------------Am Pm Converter-------------------------------------------------------------------
+            if (h > 12) {
+                h = h - 12;
+                AMPM = "PM"
+            }
+
+
+
+            // ------------------------------------------ Adding 0 To the Clock if number is less than 10 ----------------------------------------------
+            h = h < 10 ? "0" + h : h;
+            m = m < 10 ? "0" + m : m;
+            s = s < 10 ? "0" + s : s;
+
+
+
+            //  ------------------------------------------ Adding value to the html element -------------------------------------------------------
+            hour.innerText = h;
+            min.innerText = m;
+            sec.innerText = s;
+            ampm.innerText = AMPM;
+
+
+            //  repeat the same function again and again every 1000 ms (1 second) To update the value of clock every second 
+            setTimeout(() => {
+                clock();
+            }, 1000)
+        }
+        clock();
+    </script>
+</body>
+
+</html>
