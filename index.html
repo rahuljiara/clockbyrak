@@ -68,6 +68,8 @@
         }
 
         .clock {
+            width: 90%;
+            margin: 0 5%;
             position: absolute;
             top: 50%;
             display: flex;
@@ -85,11 +87,11 @@
             background: rgba(0, 0, 0, 0.479);
             color: rgba(255, 255, 255, 0.638);
             margin: 0 2.5rem;
-            font-size: 6.0rem;
+            font-size: 5.5rem;
             border-radius: 1.2rem 1.2rem 0 0;
             box-shadow: .2rem .3rem .6rem black;
             font-family: 'Black Ops One', cursive;
-            transition: 1s;
+            transition: .7s;
         }
 
         .clock img {
@@ -97,37 +99,51 @@
         }
 
         #ampm {
-            font-size: 2.5rem;
+            font-size: 2rem;
         }
 
         .clock .text {
             height: 4rem;
-            font-size: 2.0rem;
+            font-size: 1.8rem;
             border-radius: 0 0 1.2rem 1.2rem;
             box-shadow: .2rem .3rem .6rem black;
+        }
+
+        .item {
+            cursor: pointer;
+        }
+
+        .item:hover .text,
+        .item:hover #hr,
+        .item:hover #min,
+        .item:hover #sec, .date:hover  {
+            color: rgb(195, 255, 0);
+            cursor:pointer;
         }
 
         @media screen and (max-width:600px) {
             html {
                 font-size: 53%;
             }
-           
+
             .container .date {
-               font-size:5rem;
-               top:40%;
+                font-size: 5rem;
+                top: 40%;
             }
+
             .clock {
-            top:55%;
-        }
+                top: 55%;
+            }
         }
 
         @media screen and (max-width:500px) {
             html {
                 font-size: 43%;
             }
+
             .container h1 {
-                top:10%;
-                font-size:6rem;
+                top: 10%;
+                font-size: 6rem;
             }
         }
 
@@ -135,30 +151,40 @@
             html {
                 font-size: 35%;
             }
-            .clock span {
-            height: 8.0rem;
-            width: 10.5rem;
-            font-size: 6.0rem;
 
-        }
-        .container .date  {
-                font-size:4rem;
+            .clock span {
+                height: 8.0rem;
+                width: 10.5rem;
+                font-size: 6.0rem;
+
+            }
+
+            .container .date {
+                font-size: 4rem;
             }
         }
 
         @media screen and (max-width:340px) {
             html {
-                font-size: 21%;
+                font-size: 25%;
             }
+
             .container h1 {
-                top:25%;
-                font-size:7rem;
+                top: 25%;
+                font-size: 7rem;
             }
         }
 
-        @media screen and (max-width:200px) {
+        @media screen and (max-width:250px) {
             html {
                 font-size: 10%;
+            }
+        }
+
+        @media screen and (max-width:250px) {
+            .container {
+                zoom: 0.5;
+                ;
             }
         }
     </style>
@@ -249,7 +275,7 @@
                 document.body.style.backgroundPosition = "center"
                 document.body.style.backgroundSize = "cover"
             }
-            else if ((h >= 5) && (h < 10)) { // between 5-Am  To 10-Am
+            else if ((h >= 5) && (h <= 10)) { // between 5-Am  To 10-Am
                 icon.setAttribute("src", moreveIcon)
 
                 document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1624180395169-793787569aef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')"
@@ -257,7 +283,7 @@
                 document.body.style.backgroundPosition = "center"
                 document.body.style.backgroundSize = "cover"
             }
-            if ((h > 16) && (h < 19)) { // between 4-Pm  To 7-Pm
+            if ((h >= 16) && (h <= 19)) { // between 4-Pm  To 7-Pm
                 icon.setAttribute("src", moreveIcon)
 
                 document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1624180395169-793787569aef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')"
@@ -265,7 +291,7 @@
                 document.body.style.backgroundPosition = "center"
                 document.body.style.backgroundSize = "cover"
             }
-            if ((h >= 19) || (h < 5)) { // between 7-Pm  To 5-Am
+            if ((h >= 19) || (h <= 5)) { // between 7-Pm  To 5-Am
                 icon.setAttribute("src", nightIcon)
                 document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1488866022504-f2584929ca5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2062&q=80')"
                 document.body.style.backgroundRepeat = "no-repeat"
@@ -276,9 +302,11 @@
 
 
             //  ------------------------------------------Am Pm Converter-------------------------------------------------------------------
-            if (h > 12) {
-                h = h - 12;
+            if (h >= 12) {
                 AMPM = "PM"
+            }
+            if (h > 13) {
+                h = h - 12;
             }
 
 
