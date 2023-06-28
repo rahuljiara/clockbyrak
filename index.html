@@ -6,8 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clock By - Rak</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Creepster&family=Rampart+One&display=swap');
 
@@ -23,6 +21,7 @@
             margin: 0;
             height: 100vh;
             width: 100%;
+            overflow: hidden;
         }
 
         .container {
@@ -44,12 +43,14 @@
             top: 0;
             font-size: 6.0rem;
             font-family: 'Rampart One', cursive;
-            color: rgb(84, 32, 32);
-            background: rgba(255, 255, 255, 0.56);
+            color: rgb(148, 1, 1);
+            box-shadow: 0px 0px 10px rgb(0, 0, 0);
+            text-shadow: 2px 2px 2px rgba(20, 18, 16, 0.605);
             padding: .5rem 1.2rem;
             border-radius: 1.2rem;
             text-align: center;
             transition: 1s;
+            backdrop-filter: blur(.05rem);
         }
 
         .container .date {
@@ -58,11 +59,15 @@
             position: absolute;
             top: 30%;
             font-size: 2.0rem;
-            /* font-weight: bold; */
-            background: rgba(1, 25, 31, 0.755);
+            background: rgba(255, 255, 255, 0.255);
+            box-shadow: inset -5px -5px 30px rgba(0, 0, 0, 0.492),
+                inset 5px 5px 30px rgba(0, 0, 0, 0.492),
+                5px 5px 5px rgba(0, 0, 0, 0.5),
+                -5px -5px 5px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
             border-radius: 2.0rem;
             padding: 1.0rem 2.0rem;
-            color: rgba(255, 255, 255, 0.652);
+            color: black;
             font-family: 'Black Ops One', cursive;
             transition: 1s;
         }
@@ -116,9 +121,10 @@
         .item:hover .text,
         .item:hover #hr,
         .item:hover #min,
-        .item:hover #sec, .date:hover  {
+        .item:hover #sec,
+        .date:hover {
             color: rgb(195, 255, 0);
-            cursor:pointer;
+            cursor: pointer;
         }
 
         @media screen and (max-width:600px) {
@@ -164,7 +170,7 @@
             }
         }
 
-        @media screen and (max-width:340px) {
+        @media screen and (max-width:350px) {
             html {
                 font-size: 25%;
             }
@@ -184,7 +190,6 @@
         @media screen and (max-width:250px) {
             .container {
                 zoom: 0.5;
-                ;
             }
         }
     </style>
@@ -199,7 +204,7 @@
         <div class="clock">
 
             <div class="item">
-                <span id="hr">00</span>
+                <span id="hr">14</span>
                 <span class="text flex">Hour</span>
             </div>
 
@@ -219,7 +224,6 @@
             </div>
         </div>
     </div>
-    </div>
 
 
     <script>
@@ -232,98 +236,84 @@
         var Bg = document.getElementsByClassName("container");
         var icon = document.getElementById('icon')
         var bg = document.getElementsByClassName("container");
-        console.log(icon)
-
-        // ---------------------------------------------------Date Making -------------------------------------------------------
-
-        let dd = new Date().getDate();
-        let mm = new Date().getMonth() + 1; // in js month start from 0 to 11 thats why we add 1.
-        let yy = new Date().getFullYear();
-
-        date.innerText = dd;
-        month.innerText = mm;
-        year.innerText = yy;
-
-
 
         // --------------------------------------------------- Clock Making --------------------------------------------------------
         function clock() {
-
-
-            let h = new Date().getHours();
+            let h = 20 ;
+            // let h = new Date().getHours();
             let m = new Date().getMinutes();
             let s = new Date().getSeconds();
-
             let AMPM = "AM"
 
 
+            // Weather Icon / Background Changer
+            let nightIcon = "img/nightIcon.png";
+            let dayIcon = "img/dayIcon.png";
+            let moreveIcon = "img/moreveIcon.png";
 
+            // Adding Style To The Body 
+            document.body.style.backgroundRepeat = "no-repeat"
+            document.body.style.backgroundPosition = "center"
+            document.body.style.backgroundSize = "cover"
 
-
-
-
-            // -------------------------------------------- Weather Icon Changer -------------------------------------------------------------
-            let nightIcon = "https://cdn-icons-png.flaticon.com/512/1809/1809597.png";
-            let dayIcon = "https://cdn-icons-png.flaticon.com/512/3917/3917805.png";
-            let moreveIcon = "https://cdn-icons-png.flaticon.com/512/3892/3892928.png";
-
-            if ((h >= 10) && (h <= 16)) { // between 10-Am  To 4-Pm
-                icon.setAttribute("src", dayIcon)
-
-                document.body.style.backgroundImage = "url('https://images.pexels.com/photos/1542495/pexels-photo-1542495.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"
-                document.body.style.backgroundRepeat = "no-repeat"
-                document.body.style.backgroundPosition = "center"
-                document.body.style.backgroundSize = "cover"
+            if( h >=5 && h < 8){
+                icon.setAttribute("src", "img/moreveIcon.png")
+                document.body.style.backgroundImage = "url('img/eveBg.jpg')"
             }
-            else if ((h >= 5) && (h <= 10)) { // between 5-Am  To 10-Am
-                icon.setAttribute("src", moreveIcon)
-
-                document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1624180395169-793787569aef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')"
-                document.body.style.backgroundRepeat = "no-repeat"
-                document.body.style.backgroundPosition = "center"
-                document.body.style.backgroundSize = "cover"
+            else if (h >= 8 && h < 10) {
+                icon.setAttribute("src", "img/moreveIcon.png")
+                document.body.style.backgroundImage = "url('img/morBg.jpg')"
             }
-            if ((h >= 16) && (h <= 19)) { // between 4-Pm  To 7-Pm
-                icon.setAttribute("src", moreveIcon)
-
-                document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1624180395169-793787569aef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')"
-                document.body.style.backgroundRepeat = "no-repeat"
-                document.body.style.backgroundPosition = "center"
-                document.body.style.backgroundSize = "cover"
+            else if ((h >= 10) && (h < 17)) {
+                icon.setAttribute("src", "img/dayIcon.png")
+                document.body.style.backgroundImage = "url('img/dayBg.jpg')"
             }
-            if ((h >= 19) || (h <= 5)) { // between 7-Pm  To 5-Am
-                icon.setAttribute("src", nightIcon)
-                document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1488866022504-f2584929ca5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2062&q=80')"
-                document.body.style.backgroundRepeat = "no-repeat"
-                document.body.style.backgroundPosition = "center"
-                document.body.style.backgroundSize = "cover"
+
+            else if (h >= 17 && h < 20) {
+                icon.setAttribute("src", "img/moreveIcon.png")
+
+                document.body.style.backgroundImage = "url('img/eveBg.jpg')"
+            }
+            else {
+                icon.setAttribute("src", "img/nightIcon.png")
+                document.body.style.backgroundImage = "url('img/nightBg.jpg')"
             }
 
 
 
-            //  ------------------------------------------Am Pm Converter-------------------------------------------------------------------
-            if (h >= 12) {
-                AMPM = "PM"
-            }
-            if (h > 13) {
-                h = h - 12;
-            }
+            //Am Pm Converter
+            AMPM = h >= 12 ? "PM" : "AM"
+
+            // 24 hr into 12 hr format
+
+            h = h > 12 ? h - 12 : h
 
 
+            // Adding 0 To the Clock if number is less than 10
 
-            // ------------------------------------------ Adding 0 To the Clock if number is less than 10 ----------------------------------------------
             h = h < 10 ? "0" + h : h;
             m = m < 10 ? "0" + m : m;
             s = s < 10 ? "0" + s : s;
 
+            // Adding value to the html element
 
-
-            //  ------------------------------------------ Adding value to the html element -------------------------------------------------------
             hour.innerText = h;
             min.innerText = m;
             sec.innerText = s;
             ampm.innerText = AMPM;
 
+            // --------------------------------------------------- Date Making -------------------------------------------------------
+
+            let dd = new Date().getDate();
+            let mm = new Date().getMonth() + 1; // in js month start from 0 to 11 thats why we add 1.
+            let yy = new Date().getFullYear();
+            // Adding 0 For Number Less Than 10 
+            dd = dd < 10 ? "0" + dd : dd
+            mm = mm < 10 ? "0" + mm : mm
+
+            date.innerText = dd;
+            month.innerText = mm;
+            year.innerText = yy;
 
             //  repeat the same function again and again every 1000 ms (1 second) To update the value of clock every second 
             setTimeout(() => {
@@ -331,6 +321,8 @@
             }, 1000)
         }
         clock();
+
+
     </script>
 </body>
 
